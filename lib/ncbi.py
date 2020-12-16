@@ -49,8 +49,8 @@ def fetch_taxonomy_name_from_assembly_id(assembly_id_list, size):
           count = len(lines)
         if count == current_size:
           print("All IDs in this set are matched")
-          output_assembly_id_list.append(input_list)
-          output_matched_ncbi_taxid_list.append(lines)
+          output_assembly_id_list = output_assembly_id_list + input_list
+          output_matched_ncbi_taxid_list = output_matched_ncbi_taxid_list + lines
           print("Total number of IDs matched: {}".format(len(output_assembly_id_list)))
           print("Total number of IDs matched: {}".format(len(output_matched_ncbi_taxid_list)))
           current_size = size
