@@ -58,6 +58,7 @@ def fetch_taxonomy_name_from_assembly_id(assembly_id_list, size):
             output_assembly_id_list.append(input_list)
             output_matched_ncbi_taxid_list.append(lines)
             all_matched = True
+            continue
           else:
             current_size = int(math.floor(current_size/2))
             print("IDs lost because of redundant results, retrying with list size: {}".format(current_size))
