@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 LABEL Maintainer="Sean Jungbluth, jungbluth.sean@gmail.com" Version=1.0
-RUN apt-get update && apt-get -y install build-essential git gcc-multilib apt-utils expat libexpat-dev wget perl cpanminus libnet-ssleay-perl
 
+RUN apt-get update && apt-get -y install build-essential git gcc-multilib apt-utils expat libexpat-dev wget perl cpanminus libnet-ssleay-perl python3
 
 RUN perl -MNet::FTP -e '$ftp = new Net::FTP("ftp.ncbi.nlm.nih.gov", Passive => 1); $ftp->login; $ftp->binary; $ftp->get("/entrez/entrezdirect/edirect.tar.gz");'
 
