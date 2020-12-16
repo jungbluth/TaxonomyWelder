@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import random
 import subprocess
 import pandas as pd
 
@@ -27,7 +28,10 @@ def fetch_taxonomy_name_from_assembly_id(assembly_id_list, size):
   #epost -input list.txt -db assembly | elink -target taxonomy | efetch
   # epost -input list.txt -db assembly | elink -target taxonomy | efetch -format uid
   # esearch -db assembly -query GCF_001305965.1 | elink -target taxonomy | efetch
-  print("test")
+  
+  # shuffle list because otherwise identical entires collapsed, want to minimize
+  random.shuffle(assembly_id_list)
+  print("test {}".format(assembly_id_list[:4]))
   with open("list.txt", "w") as output:
     output.write('\n'.join((assembly_id_list[:size])))
   command = "epost -input list.txt -db assembly | elink -target taxonomy | efetch -format uid > temp"
