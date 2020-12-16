@@ -54,6 +54,10 @@ def fetch_taxonomy_name_from_assembly_id(assembly_id_list, size):
           lines = [line.rstrip() for line in f]
           for line in f:
             count += 1
+        print("Count is {}".format(count))
+        print("Count type is {}".format(type(count)))
+        print("current_size is {}".format(current_size))
+        print("current_size type is {}".format(type(current_size)))
         if count == current_size:
           print("All IDs matched")
           output_assembly_id_list.append(input_list)
