@@ -34,7 +34,9 @@ def fetch_taxonomy_name_from_assembly_id(assembly_id_list, size):
   print("To number of IDs to link: {}".format(len(assembly_id_list)))
   random.shuffle(assembly_id_list)
   if (len(assembly_id_list) != 0) and (len(assembly_id_list) > size):
-    input_list = assembly_id_list.pop(size)
+    input_list = assembly_id_list[:size]
+    remaining_list = assembly_id_list[size:]
+    print("input_list is {} ".format(input_list))
     with open("list.txt", "w") as output:
       output.write('\n'.join((input_list)))
     command = "epost -input list.txt -db assembly | elink -target taxonomy | efetch -format uid > temp"
