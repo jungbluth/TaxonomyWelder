@@ -34,8 +34,8 @@ def fetch_taxonomy_name_from_assembly_id(assembly_id_list, size):
   output_matched_ncbi_taxid_list = []
   input_list = assembly_id_list[:current_size]
   remaining_list = assembly_id_list[current_size:]
-  if len(output_assembly_id_list) < 100:
-    while len(output_assembly_id_list) != len(assembly_id_list):
+  while len(output_assembly_id_list) != len(assembly_id_list):
+    if len(output_assembly_id_list) < 100:
       print("Linking IDs in chunks of {}".format(current_size))
       if (len(assembly_id_list) != 0) and (len(assembly_id_list) > current_size):
         print("input_list is {} ".format(input_list))
@@ -47,12 +47,12 @@ def fetch_taxonomy_name_from_assembly_id(assembly_id_list, size):
         with open('temp', 'r') as f:
           lines = [line.rstrip() for line in f]
           count = len(lines)
-        print("Count is {}".format(count))
-        print("current_size is {}".format(current_size))
         if count == current_size:
-          print("All IDs matched")
+          print("All IDs in this set are matched")
           output_assembly_id_list.append(input_list)
           output_matched_ncbi_taxid_list.append(lines)
+          print("Total number of IDs matched: {}".format(len(output_assembly_id_list)))
+          print("Total number of IDs matched: {}".format(len(output_matched_ncbi_taxid_list)))
           current_size = size
           input_list = remaining_list[:current_size]
           remaining_list = remaining_list[current_size:]
@@ -62,9 +62,9 @@ def fetch_taxonomy_name_from_assembly_id(assembly_id_list, size):
           input_list = input_list[:current_size]
           remaining_list = input_list[current_size:] + remaining_list
           print("IDs lost because of redundant results, retrying with list size: {}".format(current_size))
-  else:
-    print("output_assembly_id_list is {}".format(output_assembly_id_list))
-    print("output_matched_ncbi_taxid_list is {}".format(output_matched_ncbi_taxid_list))
+    else:
+      print("output_assembly_id_list is {}".format(output_assembly_id_list))
+      print("output_matched_ncbi_taxid_list is {}".format(output_matched_ncbi_taxid_list))
 
 
 
