@@ -29,7 +29,7 @@ def fetch_taxonomy_name_from_assembly_id(assembly_id_list, size):
   # esearch -db assembly -query GCF_001305965.1 | elink -target taxonomy | efetch
   print("test")
   with open("list.txt", "w") as output:
-    output.write(str(assembly_id_list[:4]))
+    output.write('\n'.join((assembly_id_list[:4])))
   command = "epost -input list.txt -db assembly | elink -target taxonomy | efetch -format uid"
   out, err = _run_command(command)
   #print("assembly_id_list {}".format(assembly_id_list[:4]))
