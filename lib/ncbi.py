@@ -35,7 +35,9 @@ def fetch_taxonomy_name_from_assembly_id(assembly_id_list, size):
   output_matched_ncbi_taxid_list = []
   if len(output_assembly_id_list) < 100:
     while len(output_assembly_id_list) != len(assembly_id_list):
+      print("Looping here 1")
       while not all_matched:
+        print("Looping here 2")
         print("Linking IDs in chunks of {}".format(current_size))
         if (len(assembly_id_list) != 0) and (len(assembly_id_list) > current_size):
           input_list = assembly_id_list[:current_size]
