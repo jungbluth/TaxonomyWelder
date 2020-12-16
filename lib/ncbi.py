@@ -56,7 +56,7 @@ def fetch_taxonomy_name_from_assembly_id(assembly_id_list, size):
           output_assembly_id_list.append(input_list)
           output_matched_ncbi_taxid_list.append(lines)
           current_size = size
-          input_list = remaining_list[:current_size]
+          input_list = remaining_list
           remaining_list = remaining_list[current_size:]
         else:
           current_size = int(math.floor(current_size/2))
