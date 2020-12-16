@@ -48,9 +48,7 @@ def fetch_taxonomy_name_from_assembly_id(assembly_id_list, size):
           lines = [line.rstrip() for line in f]
           count = len(lines)
         print("Count is {}".format(count))
-        print("Count type is {}".format(type(count)))
         print("current_size is {}".format(current_size))
-        print("current_size type is {}".format(type(current_size)))
         if count == current_size:
           print("All IDs matched")
           output_assembly_id_list.append(input_list)
@@ -61,6 +59,8 @@ def fetch_taxonomy_name_from_assembly_id(assembly_id_list, size):
           continue
         else:
           current_size = int(math.floor(current_size/2))
+          input_list = input_list[:current_size]
+          remaining_list = input_list[current_size:] + remaining_list
           print("IDs lost because of redundant results, retrying with list size: {}".format(current_size))
   else:
     print("output_assembly_id_list is {}".format(output_assembly_id_list))
