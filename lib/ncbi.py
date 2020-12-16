@@ -30,10 +30,12 @@ def fetch_taxonomy_name_from_assembly_id(assembly_id_list, size):
   # esearch -db assembly -query GCF_001305965.1 | elink -target taxonomy | efetch
   
   # shuffle list because otherwise identical entires collapsed, want to minimize
+  print("Fetching NCBI TaxIDs from GTDB-used NCBI Assembly IDs")
+  print("To number of IDs to link: {}".format(len(assembly_id_list)))
   random.shuffle(assembly_id_list)
-  print("test {}".format(assembly_id_list[:4]))
-  with open("list.txt", "w") as output:
-    output.write('\n'.join((assembly_id_list[:size])))
-  command = "epost -input list.txt -db assembly | elink -target taxonomy | efetch -format uid > temp"
-  out, err = _run_command(command)
-  #print("assembly_id_list {}".format(assembly_id_list[:4]))
+  if (len(assembly_id_list) != 0) and (len(assembly_id_list) > size):
+    input_list = assembly_id_list.pop(size)
+    with open("list.txt", "w") as output:
+      output.write('\n'.join((input_list)))
+    command = "epost -input list.txt -db assembly | elink -target taxonomy | efetch -format uid > temp"
+    out, err = _run_command(command)

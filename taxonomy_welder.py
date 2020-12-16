@@ -39,7 +39,7 @@ if __name__ == "__main__":
   assembly_id_list = df_gtdb_to_ncbi_archaea_plus_bacteria["Clean_NCBI_Assembly_ID"].tolist()
 
   # step 4) link GTDB Assembly IDs to NCBI TaxIDs
-  ncbi.fetch_taxonomy_name_from_assembly_id(assembly_id_list, size=5)
+  ncbi.fetch_taxonomy_name_from_assembly_id(assembly_id_list, size=200)
 
   # step A) import silva data
   #df_silva_to_ncbi = silva.import_silva_to_ncbi_table()
