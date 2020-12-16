@@ -15,9 +15,9 @@ RUN cpanm HTML::Entities
 
 RUN wget https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/xtract.Linux.gz && gunzip xtract.Linux.gz && mv xtract.Linux /edirect/xtract && chmod +x /edirect/xtract
 
-RUN echo "ZZZZZZZZZ"
+RUN echo "ZZZZZZZZZZZZ"
 
 RUN git clone https://github.com/jungbluth/taxonomy_welder
 
-ENV PATH="/edirect${PATH}"
-WORKDIR "/tmp"
+ENV PATH="/edirect:${PATH}"
+WORKDIR "/taxonomy_welder"
