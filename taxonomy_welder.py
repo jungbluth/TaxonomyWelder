@@ -18,7 +18,7 @@ def database_versions():
   ncbi_version = "placeholder"
 
   # print versions
-  print("\nDatabase versions:")
+  print("Database versions:")
   print("SILVA: {}".format(silva_version))
   print("GTDB: {}".format(gtdb_version))
   print("NCBI: {}\n".format(ncbi_version))
