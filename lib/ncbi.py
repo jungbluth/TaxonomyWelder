@@ -61,9 +61,9 @@ def fetch_taxonomy_name_from_assembly_id(assembly_id_list, size):
           else:
             current_size = int(math.floor(current_size/2))
             print("IDs lost because of redundant results, retrying with list size: {}".format(current_size))
-    else:
-  print("output_assembly_id_list is {}".format(output_assembly_id_list))
-  print("output_matched_ncbi_taxid_list is {}".format(output_matched_ncbi_taxid_list))
+  else:
+    print("output_assembly_id_list is {}".format(output_assembly_id_list))
+    print("output_matched_ncbi_taxid_list is {}".format(output_matched_ncbi_taxid_list))
 
 
 
