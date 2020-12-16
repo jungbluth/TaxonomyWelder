@@ -58,6 +58,7 @@ def fetch_taxonomy_name_from_assembly_id(assembly_id_list, size):
           current_size = size
           input_list = remaining_list[:current_size]
           remaining_list = remaining_list[current_size:]
+          continue
         else:
           current_size = int(math.floor(current_size/2))
           print("IDs lost because of redundant results, retrying with list size: {}".format(current_size))
