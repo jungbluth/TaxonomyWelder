@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-LABEL Maintainer="Sean Jungbluth, jungbluth.sean@gmail.com" Version=1.0
+LABEL Maintainer="Sean Jungbluth, sjungbluth@lbl.gov" Version=1.0
 
 RUN apt-get -y -m update && apt-get install -y -qq python3 tzdata 
 RUN apt-get -y install build-essential git gcc-multilib apt-utils expat libexpat-dev wget perl cpanminus libnet-ssleay-perl python3-pandas

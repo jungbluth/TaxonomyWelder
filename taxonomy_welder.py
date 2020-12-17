@@ -33,6 +33,7 @@ def database_versions():
   print("GTDB - {}".format(gtdb_version))
   print("NCBI - {}\n".format(ncbi_version))
 
+
 if __name__ == "__main__":
   
   welcome_message()
@@ -48,14 +49,10 @@ if __name__ == "__main__":
   # step 3) extract list of Assembly IDs from gtdb_to_ncbi table
   assembly_id_list = df_gtdb_to_ncbi_archaea_plus_bacteria["Clean_NCBI_Assembly_ID"].tolist()
 
-  # random.shuffle(assembly_id_list)
-  # assembly_id_list = assembly_id_list[:25]
-
   # step 4) link GTDB Assembly IDs to NCBI TaxIDs
   ncbi.fetch_taxonomy_name_from_assembly_id_single(assembly_id_list)
   #ncbi.fetch_taxonomy_name_from_assembly_id_batch(assembly_id_list, size=1)
 
-  # step A) import silva data
+  # step 5) import silva data
   #df_silva_to_ncbi = silva.import_silva_to_ncbi_table()
 
-  #print(assembly_id_list)
