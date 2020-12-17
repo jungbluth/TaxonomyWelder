@@ -53,9 +53,11 @@ def fetch_taxonomy_name_from_assembly_id_single(assembly_id_list):
       input_list = remaining_list[:1]
       remaining_list = remaining_list[1:]
       if isinstance(round(len(output_assembly_id_list) / 10), int):
+        tempA_out = output_assembly_id_list[:10]
+        tempB_out = output_matched_ncbi_taxid_list[:10]
         with open('output_incremental.txt', 'a') as f:
-          for i in range(len(output_assembly_id_list)):
-            f.write("{} {}\n".format(output_assembly_id_list[i], output_matched_ncbi_taxid_list[i]))
+          for i in range(len(tempA_out)):
+            f.write("{} {}\n".format(tempA_out[i], tempB_out[i]))
       continue
   with open('output_all.txt', 'a') as f:
     for i in range(len(output_assembly_id_list)):

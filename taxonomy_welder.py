@@ -3,20 +3,29 @@
 import csv
 import random
 from lib import gtdb, ncbi, silva
+import datetime
 
 # increase the field limit count for tables
 csv.field_size_limit(10000000000)
 
 def welcome_message():
   print("\ntaxonomy_welder: a toolkit for cross-linking taxonomic ontologies")
-  print("by: Sean Jungbluth\n")
+  print("by: Sean Jungbluth (sjungbluth@lbl.gov)\n")
 
 def database_versions():
+
+  now = datetime.datetime.now()
+  year = '{:02d}'.format(now.year)
+  month = '{:02d}'.format(now.month)
+  day = '{:02d}'.format(now.day)
+  hour = '{:02d}'.format(now.hour)
+  minute = '{:02d}'.format(now.minute)
+  day_month_year = '{}-{}-{}'.format(year, month, day)
 
   # declare versions
   silva_version = 138
   gtdb_version = 95
-  ncbi_version = "placeholder"
+  ncbi_version = "accession date: {}".format(day_month_year)
 
   # print versions
   print("Database versions:")
