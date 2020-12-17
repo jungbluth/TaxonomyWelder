@@ -51,18 +51,19 @@ def fetch_taxonomy_name_from_assembly_id(assembly_id_list, size):
           print("All IDs in this set are matched")
           output_assembly_id_list = output_assembly_id_list + input_list
           output_matched_ncbi_taxid_list = output_matched_ncbi_taxid_list + lines
+          assert len(output_assembly_id_list) = len(output_matched_ncbi_taxid_list)
           print("Total number of IDs matched: {}".format(len(output_assembly_id_list)))
-          print("Total number of IDs matched: {}".format(len(output_matched_ncbi_taxid_list)))
           current_size = size
           input_list = remaining_list[:current_size]
           remaining_list = remaining_list[current_size:]
           continue
         else:
+          print("Tried to link {} IDs, but found {}".format(current_size,count))
           current_size = int(math.floor(current_size/2))
           temp_input_list = input_list[:current_size]
           remaining_list = input_list[current_size:] + remaining_list
           input_list = temp_input_list
-          print("IDs lost because of redundant results, retrying with {} IDs".format(current_size))
+          print("Retrying with {} IDs".format(current_size))
     else:
       print("output_assembly_id_list is {}".format(output_assembly_id_list))
       print("output_matched_ncbi_taxid_list is {}".format(output_matched_ncbi_taxid_list))

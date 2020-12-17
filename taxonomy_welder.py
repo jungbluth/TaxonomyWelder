@@ -7,7 +7,7 @@ from lib import gtdb, ncbi, silva
 csv.field_size_limit(10000000000)
 
 def welcome_message():
-  print("taxonomy_welder: a toolkit for cross-linking taxonomic ontologies")
+  print("\ntaxonomy_welder: a toolkit for cross-linking taxonomic ontologies")
   print("by: Sean Jungbluth\n")
 
 def database_versions():
