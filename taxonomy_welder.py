@@ -39,8 +39,8 @@ if __name__ == "__main__":
   # step 3) extract list of Assembly IDs from gtdb_to_ncbi table
   assembly_id_list = df_gtdb_to_ncbi_archaea_plus_bacteria["Clean_NCBI_Assembly_ID"].tolist()
 
-  random.shuffle(assembly_id_list)
-  assembly_id_list = assembly_id_list[:25]
+  # random.shuffle(assembly_id_list)
+  # assembly_id_list = assembly_id_list[:25]
 
   # step 4) link GTDB Assembly IDs to NCBI TaxIDs
   ncbi.fetch_taxonomy_name_from_assembly_id(assembly_id_list, size=1)
