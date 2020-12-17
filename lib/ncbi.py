@@ -51,7 +51,7 @@ def fetch_taxonomy_name_from_assembly_id(assembly_id_list, size):
           print("All IDs in this set are matched")
           output_assembly_id_list = output_assembly_id_list + input_list
           output_matched_ncbi_taxid_list = output_matched_ncbi_taxid_list + lines
-          assert len(output_assembly_id_list) = len(output_matched_ncbi_taxid_list)
+          assert len(output_assembly_id_list) == len(output_matched_ncbi_taxid_list)
           print("Total number of IDs matched: {}".format(len(output_assembly_id_list)))
           current_size = size
           input_list = remaining_list[:current_size]
