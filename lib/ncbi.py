@@ -39,7 +39,7 @@ def fetch_taxonomy_name_from_assembly_id(assembly_id_list, size):
     if current_size > len(input_list):
       current_size = len(input_list)
     print("\nTrying with IDs in chunks of {}".format(current_size))
-    if (len(assembly_id_list) != 0) and (len(assembly_id_list) > current_size):
+    if (len(input_list) != 0) and (len(input_list) > current_size):
       print("input_list is {} ".format(input_list))
       with open("list.txt", "w") as output:
         output.write('\n'.join((input_list)))
