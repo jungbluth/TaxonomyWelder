@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import os
 import csv
 import random
 from lib import gtdb, ncbi, silva
