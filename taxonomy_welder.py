@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import csv
+import random
 from lib import gtdb, ncbi, silva
 
 # increase the field limit count for tables
