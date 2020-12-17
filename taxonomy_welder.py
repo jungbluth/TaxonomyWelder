@@ -29,9 +29,9 @@ def database_versions():
 
   # print versions
   print("Database versions:")
-  print("SILVA: {}".format(silva_version))
-  print("GTDB: {}".format(gtdb_version))
-  print("NCBI: {}\n".format(ncbi_version))
+  print("SILVA - {}".format(silva_version))
+  print("GTDB - {}".format(gtdb_version))
+  print("NCBI - {}\n".format(ncbi_version))
 
 if __name__ == "__main__":
   

@@ -52,9 +52,10 @@ def fetch_taxonomy_name_from_assembly_id_single(assembly_id_list):
       print("\nTotal number of IDs matched: {} (out of {}) ({} percent done)".format(len(output_assembly_id_list),len(assembly_id_list),percent_done))
       input_list = remaining_list[:1]
       remaining_list = remaining_list[1:]
-      if isinstance(round(len(output_assembly_id_list) / 10), int):
-        tempA_out = output_assembly_id_list[:10]
-        tempB_out = output_matched_ncbi_taxid_list[:10]
+      temp_write_count = 10
+      if isinstance(round(len(output_assembly_id_list) / temp_write_count), int):
+        tempA_out = output_assembly_id_list[:temp_write_count]
+        tempB_out = output_matched_ncbi_taxid_list[:temp_write_count]
         with open('output_incremental.txt', 'a') as f:
           for i in range(len(tempA_out)):
             f.write("{} {}\n".format(tempA_out[i], tempB_out[i]))
