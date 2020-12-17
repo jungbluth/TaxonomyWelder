@@ -37,6 +37,8 @@ def fetch_taxonomy_name_from_assembly_id(assembly_id_list, size):
   remaining_list = assembly_id_list[current_size:]
   while len(output_assembly_id_list) != len(assembly_id_list):
     if len(output_assembly_id_list) < 100:
+      if current_size < len(input_list):
+        current_size = len(input_list)
       print("\nTrying with IDs in chunks of {}".format(current_size))
       if (len(assembly_id_list) != 0) and (len(assembly_id_list) > current_size):
         print("input_list is {} ".format(input_list))
@@ -53,7 +55,8 @@ def fetch_taxonomy_name_from_assembly_id(assembly_id_list, size):
           output_assembly_id_list = output_assembly_id_list + input_list
           output_matched_ncbi_taxid_list = output_matched_ncbi_taxid_list + lines
           assert len(output_assembly_id_list) == len(output_matched_ncbi_taxid_list)
-          print("Total number of IDs matched: {}".format(len(output_assembly_id_list)))
+          percent_done = (len(output_assembly_id_list) / len(assembly_id_list)) * 100
+          print("\nTotal number of IDs matched: {} (out of {}) ({} percent done)".format(len(output_assembly_id_list),len(assembly_id_list),percent_done))
           current_size = size
           input_list = remaining_list[:current_size]
           remaining_list = remaining_list[current_size:]
