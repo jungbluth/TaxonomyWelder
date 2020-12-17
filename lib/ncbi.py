@@ -36,41 +36,39 @@ def fetch_taxonomy_name_from_assembly_id(assembly_id_list, size):
   input_list = assembly_id_list[:current_size]
   remaining_list = assembly_id_list[current_size:]
   while len(output_assembly_id_list) != len(assembly_id_list):
-    if len(output_assembly_id_list) < 100:
-      if current_size < len(input_list):
-        current_size = len(input_list)
-      print("\nTrying with IDs in chunks of {}".format(current_size))
-      if (len(assembly_id_list) != 0) and (len(assembly_id_list) > current_size):
-        print("input_list is {} ".format(input_list))
-        with open("list.txt", "w") as output:
-          output.write('\n'.join((input_list)))
-        command = "epost -input list.txt -db assembly | elink -target taxonomy | efetch -format uid > temp"
-        out, err = _run_command(command)
-        count = 0
-        with open('temp', 'r') as f:
-          lines = [line.rstrip() for line in f]
-          count = len(lines)
-        if count == current_size:
-          print("All IDs in this set are matched")
-          output_assembly_id_list = output_assembly_id_list + input_list
-          output_matched_ncbi_taxid_list = output_matched_ncbi_taxid_list + lines
-          assert len(output_assembly_id_list) == len(output_matched_ncbi_taxid_list)
-          percent_done = (len(output_assembly_id_list) / len(assembly_id_list)) * 100
-          print("\nTotal number of IDs matched: {} (out of {}) ({} percent done)".format(len(output_assembly_id_list),len(assembly_id_list),percent_done))
-          current_size = size
-          input_list = remaining_list[:current_size]
-          remaining_list = remaining_list[current_size:]
-          continue
-        else:
-          print("Tried to link {} IDs, but found {}".format(current_size,count))
-          current_size = int(math.floor(current_size/2))
-          temp_input_list = input_list[:current_size]
-          remaining_list = input_list[current_size:] + remaining_list
-          input_list = temp_input_list
-    else:
-      print("output_assembly_id_list is {}".format(output_assembly_id_list))
-      print("output_matched_ncbi_taxid_list is {}".format(output_matched_ncbi_taxid_list))
-
+    if current_size > len(input_list):
+      current_size = len(input_list)
+    print("\nTrying with IDs in chunks of {}".format(current_size))
+    if (len(assembly_id_list) != 0) and (len(assembly_id_list) > current_size):
+      print("input_list is {} ".format(input_list))
+      with open("list.txt", "w") as output:
+        output.write('\n'.join((input_list)))
+      command = "epost -input list.txt -db assembly | elink -target taxonomy | efetch -format uid > temp"
+      out, err = _run_command(command)
+      count = 0
+      with open('temp', 'r') as f:
+        lines = [line.rstrip() for line in f]
+        count = len(lines)
+      if count == current_size:
+        print("All IDs in this set are matched")
+        output_assembly_id_list = output_assembly_id_list + input_list
+        output_matched_ncbi_taxid_list = output_matched_ncbi_taxid_list + lines
+        assert len(output_assembly_id_list) == len(output_matched_ncbi_taxid_list)
+        percent_done = round((len(output_assembly_id_list) / len(assembly_id_list)) * 100)
+        print("\nTotal number of IDs matched: {} (out of {}) ({} percent done)".format(len(output_assembly_id_list),len(assembly_id_list),percent_done))
+        current_size = size
+        input_list = remaining_list[:current_size]
+        remaining_list = remaining_list[current_size:]
+        continue
+      else:
+        print("Tried to link {} IDs, but found {}".format(current_size,count))
+        current_size = int(math.floor(current_size/2))
+        temp_input_list = input_list[:current_size]
+        remaining_list = input_list[current_size:] + remaining_list
+        input_list = temp_input_list
+  with open('output.txt', 'w') as f:
+    for i in range(len(output_assembly_id_list)):
+      f.write("{} {}\n".format(output_assembly_id_list[i], output_matched_ncbi_taxid_list[i]))
 
 
 
