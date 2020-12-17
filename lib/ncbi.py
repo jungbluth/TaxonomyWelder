@@ -10,13 +10,14 @@ def _run_command(command):
   """
   _run_command: run command and print result
   """
-  print('Start executing command:\n{}'.format(command))
+  #print('Start executing command:\n{}'.format(command))
   pipe = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
   output, stderr = pipe.communicate()
   exitCode = pipe.returncode
   if (exitCode == 0):
-    print('Executed command:\n{}\n'.format(command) +
-      'Exit Code: {}\n'.format(exitCode))
+    pass
+    #print('Executed command:\n{}\n'.format(command) +
+    #  'Exit Code: {}\n'.format(exitCode))
   else:
     error_msg = 'Error running command:\n{}\n'.format(command)
     error_msg += 'Exit Code: {}\nOutput:\n{}\nStderr:\n{}'.format(exitCode, output, stderr)
@@ -36,7 +37,7 @@ def fetch_taxonomy_name_from_assembly_id(assembly_id_list, size):
   remaining_list = assembly_id_list[current_size:]
   while len(output_assembly_id_list) != len(assembly_id_list):
     if len(output_assembly_id_list) < 100:
-      print("Linking IDs in chunks of {}".format(current_size))
+      print("Trying with IDs in chunks of {}".format(current_size))
       if (len(assembly_id_list) != 0) and (len(assembly_id_list) > current_size):
         print("input_list is {} ".format(input_list))
         with open("list.txt", "w") as output:
@@ -63,7 +64,6 @@ def fetch_taxonomy_name_from_assembly_id(assembly_id_list, size):
           temp_input_list = input_list[:current_size]
           remaining_list = input_list[current_size:] + remaining_list
           input_list = temp_input_list
-          print("Retrying with {} IDs".format(current_size))
     else:
       print("output_assembly_id_list is {}".format(output_assembly_id_list))
       print("output_matched_ncbi_taxid_list is {}".format(output_matched_ncbi_taxid_list))
