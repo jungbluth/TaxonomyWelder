@@ -32,6 +32,7 @@ def fetch_taxonomy_name_from_assembly_id_single(assembly_id_list):
   print("Number of IDs to link: {}".format(len(assembly_id_list)))
   output_assembly_id_list = []
   output_matched_ncbi_taxid_list = []
+  unmatched_assembly_id = []
   input_list = assembly_id_list[:1]
   remaining_list = assembly_id_list[1:]
   while len(output_assembly_id_list) != len(assembly_id_list):
@@ -41,6 +42,11 @@ def fetch_taxonomy_name_from_assembly_id_single(assembly_id_list):
         output.write('\n'.join((input_list)))
       command = "epost -input list.txt -db assembly | elink -target taxonomy | efetch -format uid > temp"
       out, err = _run_command(command)
+      if os.stat("temp").st_size == 0: # some IDs return no hits
+        unmatched_assembly_id = unmatched_assembly_id + input_list
+        input_list = remaining_list[:1]
+        remaining_list = remaining_list[1:]
+        continue
       count = 0
       with open('temp', 'r') as f:
         lines = [line.rstrip() for line in f]
@@ -58,6 +64,9 @@ def fetch_taxonomy_name_from_assembly_id_single(assembly_id_list):
   with open('/tmp/output_all.txt', 'a') as f:
     for i in range(len(output_assembly_id_list)):
       f.write("{} {}\n".format(output_assembly_id_list[i], output_matched_ncbi_taxid_list[i]))
+  with open('/tmp/unmatched_ids.txt', 'a') as f:
+    for i in range(len(unmatched_assembly_id)):
+      f.write("{} {}\n".format(unmatched_assembly_id[i]))
 
 
 
