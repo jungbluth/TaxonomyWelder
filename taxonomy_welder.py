@@ -43,7 +43,8 @@ if __name__ == "__main__":
   # assembly_id_list = assembly_id_list[:25]
 
   # step 4) link GTDB Assembly IDs to NCBI TaxIDs
-  ncbi.fetch_taxonomy_name_from_assembly_id(assembly_id_list, size=1)
+  ncbi.fetch_taxonomy_name_from_assembly_id_single(assembly_id_list)
+  #ncbi.fetch_taxonomy_name_from_assembly_id_batch(assembly_id_list, size=1)
 
   # step A) import silva data
   #df_silva_to_ncbi = silva.import_silva_to_ncbi_table()
