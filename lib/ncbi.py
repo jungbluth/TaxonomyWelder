@@ -36,7 +36,7 @@ def fetch_taxonomy_name_from_assembly_id_single(assembly_id_list):
   remaining_list = assembly_id_list[1:]
   while len(output_assembly_id_list) != len(assembly_id_list):
     if (len(input_list) != 0):
-      print("input_list is {} ".format(input_list))
+      print("Currently linking ID: {} ".format(input_list))
       with open("list.txt", "w") as output:
         output.write('\n'.join((input_list)))
       command = "epost -input list.txt -db assembly | elink -target taxonomy | efetch -format uid > temp"
@@ -45,16 +45,14 @@ def fetch_taxonomy_name_from_assembly_id_single(assembly_id_list):
       with open('temp', 'r') as f:
         lines = [line.rstrip() for line in f]
         count = len(lines)
-      if count == current_size:
-        print("All IDs in this set are matched")
-        output_assembly_id_list = output_assembly_id_list + input_list
-        output_matched_ncbi_taxid_list = output_matched_ncbi_taxid_list + lines
-        assert len(output_assembly_id_list) == len(output_matched_ncbi_taxid_list)
-        percent_done = round((len(output_assembly_id_list) / len(assembly_id_list)) * 100)
-        print("\nTotal number of IDs matched: {} (out of {}) ({} percent done)".format(len(output_assembly_id_list),len(assembly_id_list),percent_done))
-        input_list = remaining_list[:1]
-        remaining_list = remaining_list[1:]
-        continue
+      output_assembly_id_list = output_assembly_id_list + input_list
+      output_matched_ncbi_taxid_list = output_matched_ncbi_taxid_list + lines
+      assert len(output_assembly_id_list) == len(output_matched_ncbi_taxid_list)
+      percent_done = round((len(output_assembly_id_list) / len(assembly_id_list)) * 100)
+      print("\nTotal number of IDs matched: {} (out of {}) ({} percent done)".format(len(output_assembly_id_list),len(assembly_id_list),percent_done))
+      input_list = remaining_list[:1]
+      remaining_list = remaining_list[1:]
+      continue
   with open('output.txt', 'w') as f:
     for i in range(len(output_assembly_id_list)):
       f.write("{} {}\n".format(output_assembly_id_list[i], output_matched_ncbi_taxid_list[i]))
