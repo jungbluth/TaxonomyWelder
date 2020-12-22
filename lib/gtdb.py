@@ -2,45 +2,31 @@
 
 import pandas as pd
 
-# might use at some point to validate results
-def import_validation_files():
+
+def import_gtdb_to_ncbi_to_gg_to_silva_table():
 
   # paths to data
-  gtdb_to_ncbi_archaea = "https://data.ace.uq.edu.au/public/gtdb/data/releases/release95/95.0/auxillary_files/gtdb_vs_ncbi_r95_archaea.xlsx"
-  gtdb_to_ncbi_bacteria = "https://data.ace.uq.edu.au/public/gtdb/data/releases/release95/95.0/auxillary_files/gtdb_vs_ncbi_r95_bacteria.xlsx"
+  gtdb_to_ncbi_to_gg_silva_archaea = "https://data.ace.uq.edu.au/public/gtdb/data/releases/latest/ar122_metadata.tar.gz"
+  gtdb_to_ncbi_to_gg_silva_bacteria = "https://data.ace.uq.edu.au/public/gtdb/data/releases/latest/bac120_metadata.tar.gz"
 
   # import as pandas dataframe
-  df_gtdb_to_ncbi_archaea = pd.DataFrame(pd.read_excel(gtdb_to_ncbi_archaea)) 
-  df_gtdb_to_ncbi_bacteria = pd.DataFrame(pd.read_excel(gtdb_to_ncbi_bacteria)) 
-
-  return df_gtdb_to_ncbi_archaea, df_gtdb_to_ncbi_bacteria 
-
-
-def import_gtdb_to_ncbi_table():
-
-  # paths to data
-  gtdb_to_ncbi_archaea = "https://data.ace.uq.edu.au/public/gtdb/data/releases/release95/95.0/ar122_taxonomy_r95.tsv.gz"
-  gtdb_to_ncbi_bacteria = "https://data.ace.uq.edu.au/public/gtdb/data/releases/release95/95.0/bac120_taxonomy_r95.tsv.gz"
-
-  # import as pandas dataframe
-  df_gtdb_to_ncbi_archaea = pd.DataFrame(pd.read_csv(gtdb_to_ncbi_archaea, sep='\t', header = None)) 
-  df_gtdb_to_ncbi_bacteria = pd.DataFrame(pd.read_csv(gtdb_to_ncbi_bacteria, sep='\t', header = None)) 
-
-  # concatenate dataframes
-  df_gtdb_to_ncbi_archaea_plus_bacteria = pd.concat([df_gtdb_to_ncbi_archaea, df_gtdb_to_ncbi_bacteria])
+  df_gtdb_to_ncbi_to_gg_silva_archaea = pd.DataFrame(pd.read_csv(gtdb_to_ncbi_to_gg_silva_archaea, sep='\t'))
+  df_gtdb_to_ncbi_to_gg_silva_bacteria = pd.DataFrame(pd.read_csv(gtdb_to_ncbi_to_gg_silva_bacteria, sep='\t'))
 
   # rename columns
-  df_gtdb_to_ncbi_archaea_plus_bacteria = df_gtdb_to_ncbi_archaea_plus_bacteria.rename(columns={0: "NCBI_Assembly_ID", 1: "GTDB_R95_Taxonomy"})
+  df_gtdb_to_ncbi_to_gg_silva_archaea.columns.values[0] = "GTDB_accession"
+  df_gtdb_to_ncbi_to_gg_silva_bacteria.columns.values[0] = "GTDB_accession"
 
-  return df_gtdb_to_ncbi_archaea_plus_bacteria
+  # concatenate dataframes
+  df_gtdb_to_ncbi_to_gg_silva_archaea_plus_bacteria = pd.concat([df_gtdb_to_ncbi_to_gg_silva_archaea, df_gtdb_to_ncbi_to_gg_silva_bacteria])
 
-
-def add_refseq_or_genbank_column(df_gtdb_to_ncbi_archaea_plus_bacteria):
+  # drop empty rows
+  df_gtdb_to_ncbi_to_gg_silva_archaea_plus_bacteria = df_gtdb_to_ncbi_to_gg_silva_archaea_plus_bacteria.dropna(how='all')
 
   # add column to indicate if data from refseq or genbank
-  df_gtdb_to_ncbi_archaea_plus_bacteria["RefSeq_or_GenBank"] = df_gtdb_to_ncbi_archaea_plus_bacteria["NCBI_Assembly_ID"].map(lambda x: x[:2])
+  df_gtdb_to_ncbi_to_gg_silva_archaea_plus_bacteria["RefSeq_or_GenBank"] = df_gtdb_to_ncbi_to_gg_silva_archaea_plus_bacteria["GTDB_accession"].map(lambda x: x[:2])
 
-  # add column with clean version of NCBI Assembly ID
-  df_gtdb_to_ncbi_archaea_plus_bacteria["Clean_NCBI_Assembly_ID"] = df_gtdb_to_ncbi_archaea_plus_bacteria["NCBI_Assembly_ID"].map(lambda x: x[3:])
+  # keep only columns required for taxonomy linking
+  df_gtdb_to_ncbi_to_gg_silva_archaea_plus_bacteria_trim = df_gtdb_to_ncbi_to_gg_silva_archaea_plus_bacteria[["GTDB_accession","RefSeq_or_GenBank","ncbi_genbank_assembly_accession","ncbi_taxid","gtdb_taxonomy","ncbi_taxonomy","ncbi_taxonomy_unfiltered","ssu_gg_taxonomy","ssu_silva_taxonomy"]]
 
-  return df_gtdb_to_ncbi_archaea_plus_bacteria
+  return df_gtdb_to_ncbi_to_gg_silva_archaea_plus_bacteria_trim
