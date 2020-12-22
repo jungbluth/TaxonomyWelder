@@ -51,6 +51,3 @@ if __name__ == "__main__":
   df_gtdb_to_ncbi_to_gg_silva_archaea_plus_bacteria_trim.to_csv("df_gtdb_to_ncbi_to_gg_silva_archaea_plus_bacteria_trim.tsv", index=False, sep='\t', header=True)
   df_silva_to_ncbi.to_csv("df_silva_to_ncbi.tsv", index=False, sep='\t', header=True)
 
-
-  #print(df_gtdb_to_ncbi_to_gg_silva_archaea_plus_bacteria_trim)
-  #print(df_silva_to_ncbi)
