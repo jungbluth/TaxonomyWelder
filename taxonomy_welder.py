@@ -15,6 +15,7 @@ def welcome_message():
   print("\ntaxonomy_welder: a toolkit for cross-linking taxonomic ontologies")
   print("by: Sean Jungbluth (sjungbluth@lbl.gov)\n")
 
+
 def database_versions():
 
   # produce date stamp for NCBI database acccession date
@@ -29,13 +30,15 @@ def database_versions():
   # declare versions
   silva_version = 138
   gtdb_version = 95
-  #ncbi_version = "accession date: {}".format(day_month_year)
+  ncbi_version = "accession date: {}".format(day_month_year)
+  img_version = "accession date: 2021-01-19"
 
   # print versions
   print("Database versions:")
   print("SILVA - {}".format(silva_version))
   print("GTDB - {}".format(gtdb_version))
-  #print("NCBI - {}\n".format(ncbi_version))
+  print("IMG - {}".format(img_version))
+  print("NCBI - {}\n".format(ncbi_version))
 
 def arg_parser():
   parser = argparse.ArgumentParser(prog='taxonomy_welder',usage='%(prog)s.py --dl_gtdb [y/n] --dl_silva [y/n] --help --version', description="""
