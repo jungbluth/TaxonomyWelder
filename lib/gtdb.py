@@ -2,6 +2,11 @@
 
 import pandas as pd
 
+# gtdb tables provided online generated using online scripts
+# info: https://gtdb.ecogenomic.org/tools
+# *) https://github.com/nick-youngblut/gtdb_to_taxdump
+# *) https://github.com/pirovc/genome_updater
+# *) https://github.com/rrwick/Metagenomics-Index-Correction/blob/master/tax_from_gtdb.py
 
 def import_gtdb_to_ncbi_to_gg_to_silva_table():
 
@@ -27,6 +32,6 @@ def import_gtdb_to_ncbi_to_gg_to_silva_table():
   df_gtdb_to_ncbi_to_gg_silva_archaea_plus_bacteria["RefSeq_or_GenBank"] = df_gtdb_to_ncbi_to_gg_silva_archaea_plus_bacteria["GTDB_accession"].map(lambda x: x[:2])
 
   # keep only columns required for taxonomy linking
-  df_gtdb_to_ncbi_to_gg_silva_archaea_plus_bacteria_trim = df_gtdb_to_ncbi_to_gg_silva_archaea_plus_bacteria[["GTDB_accession","RefSeq_or_GenBank","ncbi_genbank_assembly_accession","ncbi_taxid","gtdb_taxonomy","ncbi_taxonomy","ncbi_taxonomy_unfiltered","ssu_gg_taxonomy","ssu_silva_taxonomy"]]
+  df_gtdb_to_ncbi_to_gg_silva_archaea_plus_bacteria_trim = df_gtdb_to_ncbi_to_gg_silva_archaea_plus_bacteria[["GTDB_accession","RefSeq_or_GenBank","ncbi_genbank_assembly_accession","ncbi_species_taxid","ncbi_taxid","gtdb_taxonomy","ncbi_taxonomy","ncbi_taxonomy_unfiltered","ssu_query_id","ssu_gg_taxonomy","ssu_silva_taxonomy"]]
 
   return df_gtdb_to_ncbi_to_gg_silva_archaea_plus_bacteria_trim
