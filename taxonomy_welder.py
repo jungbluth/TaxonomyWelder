@@ -16,38 +16,28 @@ csv.field_size_limit(10000000000)
 
 silva_version = 138
 gtdb_version = 202
-img_version = "accession date: 2021-01-19"
+img_version = "accession date: 2021-10-27"
+ncbi_version = "accession date: 2021-10-27"
 
 def welcome_message():
   print("\ntaxonomy_welder: a toolkit for cross-linking taxonomic ontologies")
   print("by: Sean Jungbluth (sjungbluth@lbl.gov) and the DOE Systems Biology KnowledgeBase (KBase) Team\n")
 
-
-def database_versions(silva_version, gtdb_version, img_version):
-
-  # produce date stamp for NCBI database acccession date
-  now = datetime.datetime.now()
-  year = '{:02d}'.format(now.year)
-  month = '{:02d}'.format(now.month)
-  day = '{:02d}'.format(now.day)
-  hour = '{:02d}'.format(now.hour)
-  minute = '{:02d}'.format(now.minute)
-  day_month_year = '{}-{}-{}'.format(year, month, day)
-
-  #ncbi_version = "accession date: {}".format(day_month_year)
+def database_versions(silva_version, gtdb_version, img_version, ncbi_version):
 
   # print versions
   print("Current database versions:")
-  print("SILVA - {}".format(silva_version))
-  print("GTDB - {}".format(gtdb_version))
   print("IMG - {}".format(img_version))
-  #print("NCBI - {}\n".format(ncbi_version))
+  print("NCBI - {}\n".format(ncbi_version))
+  print("GTDB - {}".format(gtdb_version))
+  print("SILVA - {}".format(silva_version))
 
 def arg_parser():
   parser = argparse.ArgumentParser(prog='taxonomy_welder',usage='%(prog)s.py --dl_gtdb [y/n] --dl_silva [y/n] --help --version', description="""
   taxonomy_welder is a toolkit for query/parsing/merging NCBI/GTDB/SILVA taxonomies.
   """,formatter_class=RawTextHelpFormatter)
   parser.add_argument("--dl_img", dest="dl_img", default="n", help="""Download current IMG-based files. (default n)""")
+  parser.add_argument("--dl_ncbi", dest="dl_ncbi", default="n", help="""Download current NCBI-based files. (default n)""")
   parser.add_argument("--dl_gtdb", dest="dl_gtdb", default="n", help="""Download current GTDB-based files. (default n)""")
   parser.add_argument("--dl_silva", dest="dl_silva", default="n", help="""Download current SILVA-based files. (default n)""")
   parser.add_argument("--dl_legacy_silva", dest="dl_legacy_silva", default="n", help="""Download legacy SILVA-based files. (default n)""")
@@ -69,12 +59,17 @@ if __name__ == "__main__":
   # unique use cases require legacy silva (e.g. MGnify currently uses SILVA v132)
   legacy_silva_version = args.legacy_silva_version
 
-
   if args.dl_img is not 'n':
-    print("\nStart: Downloading current IMG files")
+    print("\nStart: Loading cached IMG files")
     df_img_to_ncbi = img.import_img_to_ncbi_table()
     df_img_to_ncbi.to_csv("IMG__img_to_ncbi.tsv", index=False, sep='\t', header=True)
-    print("End: Downloading IMG files")
+    print("End: Loading cached IMG files")
+
+  if args.dl_ncbi is not 'n':
+    print("\nStart: Loading cached NCBI files")
+    df_ncbi = img.import_ncbi_table()
+    df_ncbi.to_csv("NCBI__ncbi_full_taxonomy.tsv", index=False, sep='\t', header=True)
+    print("End: Loading cached NCBI files")
 
   if args.dl_gtdb is not 'n':
     print("\nStart: Downloading current GTDB files")

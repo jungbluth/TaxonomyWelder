@@ -53,7 +53,7 @@ def merge_current_and_legacy_silva(slv_version, legacy_slv_version):
   # merge
   silva_ALL_COMBINED = current_silva.merge(legacy_silva, left_on='SLV_accession', right_on='SLV_accession')
 
-  # rename columns
+  # rename columns from current silva
   silva_ALL_COMBINED.columns.values[0] = "SLV{}_accession".format(slv_version)
   silva_ALL_COMBINED.columns.values[1] = "SLV{}_NCBI_taxid".format(slv_version)
   silva_ALL_COMBINED.columns.values[2] = "SLV{}_NCBI_accession".format(slv_version)
@@ -61,6 +61,7 @@ def merge_current_and_legacy_silva(slv_version, legacy_slv_version):
   silva_ALL_COMBINED.columns.values[4] = "SLV{}_organisms_name".format(slv_version)
   silva_ALL_COMBINED.columns.values[5] = "SLV{}_taxid".format(slv_version)
 
+  # rename columns from legacy silva
   silva_ALL_COMBINED.columns.values[6] = "SLV{}_NCBI_taxid".format(legacy_slv_version)
   silva_ALL_COMBINED.columns.values[7] = "SLV{}_NCBI_accession".format(legacy_slv_version)
   silva_ALL_COMBINED.columns.values[8] = "SLV{}_taxonomy".format(legacy_slv_version)
