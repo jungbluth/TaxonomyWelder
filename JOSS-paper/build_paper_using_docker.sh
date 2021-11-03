@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# navigate to /path/to/taxonomy_welder/JOSS_paper
+# navigate to /path/to/TaxonomyWelder/JOSS_paper
 
 docker run --rm \
     --volume $PWD:/data \

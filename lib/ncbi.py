@@ -9,7 +9,7 @@ import pandas as pd
 def import_ncbi_table():
 
   # paths to data
-  ncbi_taxid_to_full_taxonomy = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/NCBI/ncbi_lineages_2021-10-28.csv.gz"
+  ncbi_taxid_to_full_taxonomy = "https://raw.githubusercontent.com/jungbluth/TaxonomyWelder/main/docs/NCBI/ncbi_lineages_2021-10-28.csv.gz"
 
   # import as pandas dataframe
   df_ncbi_taxid_to_full_taxonomy = pd.DataFrame(pd.read_csv(ncbi_taxid_to_full_taxonomy, sep=','))

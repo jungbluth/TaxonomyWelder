@@ -6,20 +6,20 @@ import pandas as pd
 def import_img_to_ncbi_table():
 
   # paths to data
-  img_to_ncbi_archaea = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/IMG/current/IMGMER-Archaea_27-oct-2022.tsv.gz"
-  img_to_ncbi_bacteria = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/IMG/current/IMGMER-Bacteria_27-oct-2022.tsv.gz"
-  img_to_ncbi_eukaryota = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/IMG/current/IMGMER-Eukaryota_27-oct-2022.tsv.gz"
-  img_to_ncbi_plasmid = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/IMG/current/IMGMER-Plasmid_27-oct-2022.tsv.gz"
-  img_to_ncbi_viruses = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/IMG/current/IMGMER-Viruses_27-oct-2022.tsv.gz"
-  img_to_ncbi_gfragment = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/IMG/current/IMGMER-GFragment_27-oct-2022.tsv.gz"
+  img_to_ncbi_archaea = "https://raw.githubusercontent.com/jungbluth/TaxonomyWelder/main/docs/IMG/current/IMGMER-Archaea_27-oct-2022.tsv.gz"
+  img_to_ncbi_bacteria = "https://raw.githubusercontent.com/jungbluth/TaxonomyWelder/main/docs/IMG/current/IMGMER-Bacteria_27-oct-2022.tsv.gz"
+  img_to_ncbi_eukaryota = "https://raw.githubusercontent.com/jungbluth/TaxonomyWelder/main/docs/IMG/current/IMGMER-Eukaryota_27-oct-2022.tsv.gz"
+  img_to_ncbi_plasmid = "https://raw.githubusercontent.com/jungbluth/TaxonomyWelder/main/docs/IMG/current/IMGMER-Plasmid_27-oct-2022.tsv.gz"
+  img_to_ncbi_viruses = "https://raw.githubusercontent.com/jungbluth/TaxonomyWelder/main/docs/IMG/current/IMGMER-Viruses_27-oct-2022.tsv.gz"
+  img_to_ncbi_gfragment = "https://raw.githubusercontent.com/jungbluth/TaxonomyWelder/main/docs/IMG/current/IMGMER-GFragment_27-oct-2022.tsv.gz"
 
   # paths to old data
-  # img_to_ncbi_archaea = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/IMG/old/taxontable36551_19-jan-2021.xls.gz"
-  # img_to_ncbi_bacteria = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/IMG/old/taxontable37056_19-jan-2021.xls.gz"
-  # img_to_ncbi_eukaryota = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/IMG/old/taxontable37303_19-jan-2021.xls.gz"
-  # img_to_ncbi_plasmid = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/IMG/old/taxontable37445_19-jan-2021.xls.gz"
-  # img_to_ncbi_viruses = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/IMG/old/taxontable37511_19-jan-2021.xls.gz"
-  # img_to_ncbi_gfragment = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/IMG/old/taxontable37553_19-jan-2021.xls.gz"
+  # img_to_ncbi_archaea = "https://raw.githubusercontent.com/jungbluth/TaxonomyWelder/main/docs/IMG/old/taxontable36551_19-jan-2021.xls.gz"
+  # img_to_ncbi_bacteria = "https://raw.githubusercontent.com/jungbluth/TaxonomyWelder/main/docs/IMG/old/taxontable37056_19-jan-2021.xls.gz"
+  # img_to_ncbi_eukaryota = "https://raw.githubusercontent.com/jungbluth/TaxonomyWelder/main/docs/IMG/old/taxontable37303_19-jan-2021.xls.gz"
+  # img_to_ncbi_plasmid = "https://raw.githubusercontent.com/jungbluth/TaxonomyWelder/main/docs/IMG/old/taxontable37445_19-jan-2021.xls.gz"
+  # img_to_ncbi_viruses = "https://raw.githubusercontent.com/jungbluth/TaxonomyWelder/main/docs/IMG/old/taxontable37511_19-jan-2021.xls.gz"
+  # img_to_ncbi_gfragment = "https://raw.githubusercontent.com/jungbluth/TaxonomyWelder/main/docs/IMG/old/taxontable37553_19-jan-2021.xls.gz"
 
   # import as pandas dataframe
   img_table_header_list = [ "IMG_ID_taxon_oid", "Domain", "Sequencing_Status", "Study_Name", "Genome_Name_Sample_Name", "Sequencing_Center", "IMG_Genome_ID", "Phylum", "Class", "Order", "Family", "Genus", "Species", "IMG_Cluster_ID", "IMG_Release_Pipeline_Version","NCBI_Taxon_ID", "Strain", "Genome_Size_assembled", "Gene_Count_assembled" ]

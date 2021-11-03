@@ -1,4 +1,6 @@
-# taxonomy_welder
+# TaxonomyWelder
+
+Warning: Readme requires updating!
 
 query/parsing/merging tool for NCBI/GTDB/SILVA taxonomies
 

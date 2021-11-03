@@ -21,7 +21,7 @@ img_version = "accession date: 2021-10-27"
 ncbi_version = "accession date: 2021-10-27"
 
 def welcome_message():
-  print("\ntaxonomy_welder: a toolkit for cross-linking taxonomic ontologies")
+  print("\nTaxonomyWelder: a toolkit for cross-linking taxonomic ontologies")
   print("by: Sean Jungbluth (sjungbluth@lbl.gov) and the DOE Systems Biology KnowledgeBase (KBase) Team\n")
 
 def database_versions(silva_version, gtdb_version, img_version, ncbi_version):
@@ -34,8 +34,8 @@ def database_versions(silva_version, gtdb_version, img_version, ncbi_version):
   print("SILVA - v{}".format(silva_version))
 
 def arg_parser():
-  parser = argparse.ArgumentParser(prog='taxonomy_welder',usage='%(prog)s.py --dl_gtdb [y/n] --dl_silva [y/n] --help --version', description="""
-  taxonomy_welder: a toolkit for cross-linking taxonomic ontologies.
+  parser = argparse.ArgumentParser(prog='TaxonomyWelder',usage='%(prog)s.py --dl_gtdb [y/n] --dl_silva [y/n] --help --version', description="""
+  TaxonomyWelder: a toolkit for cross-linking taxonomic ontologies.
   by: Sean Jungbluth (sjungbluth@lbl.gov) and the DOE Systems Biology KnowledgeBase (KBase) Team.
   """,formatter_class=RawTextHelpFormatter)
   parser.add_argument("--dl_img", dest="dl_img", default="n", help="""Download current IMG-based files. (default n)""")
