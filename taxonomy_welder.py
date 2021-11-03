@@ -5,7 +5,7 @@ import random
 import sys
 import argparse
 from argparse import RawTextHelpFormatter
-from lib import gtdb, silva, img
+from lib import gtdb, silva, img, ncbi
 import datetime
 
 # notes:
@@ -14,6 +14,7 @@ import datetime
 # increase the field limit count for tables
 csv.field_size_limit(10000000000)
 
+# declare versions
 silva_version = 138
 gtdb_version = 202
 img_version = "accession date: 2021-10-27"
@@ -26,15 +27,16 @@ def welcome_message():
 def database_versions(silva_version, gtdb_version, img_version, ncbi_version):
 
   # print versions
-  print("Current database versions:")
+  print("Current database versions and sources:")
   print("IMG - {}".format(img_version))
-  print("NCBI - {}\n".format(ncbi_version))
-  print("GTDB - {}".format(gtdb_version))
-  print("SILVA - {}".format(silva_version))
+  print("NCBI - {}".format(ncbi_version))
+  print("GTDB - v{}".format(gtdb_version))
+  print("SILVA - v{}".format(silva_version))
 
 def arg_parser():
   parser = argparse.ArgumentParser(prog='taxonomy_welder',usage='%(prog)s.py --dl_gtdb [y/n] --dl_silva [y/n] --help --version', description="""
-  taxonomy_welder is a toolkit for query/parsing/merging NCBI/GTDB/SILVA taxonomies.
+  taxonomy_welder: a toolkit for cross-linking taxonomic ontologies.
+  by: Sean Jungbluth (sjungbluth@lbl.gov) and the DOE Systems Biology KnowledgeBase (KBase) Team.
   """,formatter_class=RawTextHelpFormatter)
   parser.add_argument("--dl_img", dest="dl_img", default="n", help="""Download current IMG-based files. (default n)""")
   parser.add_argument("--dl_ncbi", dest="dl_ncbi", default="n", help="""Download current NCBI-based files. (default n)""")
@@ -54,7 +56,7 @@ if __name__ == "__main__":
 
   welcome_message()
 
-  database_versions(silva_version, gtdb_version, img_version)
+  database_versions(silva_version, gtdb_version, img_version, ncbi_version)
 
   # unique use cases require legacy silva (e.g. MGnify currently uses SILVA v132)
   legacy_silva_version = args.legacy_silva_version
@@ -67,7 +69,7 @@ if __name__ == "__main__":
 
   if args.dl_ncbi is not 'n':
     print("\nStart: Loading cached NCBI files")
-    df_ncbi = img.import_ncbi_table()
+    df_ncbi = ncbi.import_ncbi_table()
     df_ncbi.to_csv("NCBI__ncbi_full_taxonomy.tsv", index=False, sep='\t', header=True)
     print("End: Loading cached NCBI files")
 

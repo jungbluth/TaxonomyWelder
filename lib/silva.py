@@ -5,30 +5,30 @@ import pandas as pd
 def import_silva_to_ncbi_table(slv_version):
 
   # paths to data
-  #silva_parc_to_ncbi = "https://ftp.arb-silva.de/release_" + slv_version + "/Exports/full_metadata/SILVA_" + slv_version + "_SSUParc.full_metadata.gz"
-  #silva_ref_to_ncbi = "https://ftp.arb-silva.de/release_" + slv_version + "/Exports/full_metadata/SILVA_" + slv_version + "_SSURef.full_metadata.gz"
+  silva_parc_to_ncbi = "https://ftp.arb-silva.de/release_{}/Exports/full_metadata/SILVA_{}_SSUParc.full_metadata.gz".format(slv_version,slv_version)
+  silva_ref_to_ncbi = "https://ftp.arb-silva.de/release_{}/Exports/full_metadata/SILVA_{}_SSURef.full_metadata.gz".format(slv_version,slv_version)
   silva_nr99_to_ncbi = "https://ftp.arb-silva.de/release_{}/Exports/full_metadata/SILVA_{}_SSURef_Nr99.full_metadata.gz".format(slv_version,slv_version)
 
   # paths to data
-  #silva_parc_taxonomy = "https://ftp.arb-silva.de/release_" + slv_version + "/Exports/taxonomy/taxmap_slv_ssu_parc_" + slv_version + ".txt.gz"
-  #silva_ref_taxonomy = "https://ftp.arb-silva.de/release_" + slv_version + "/Exports/taxonomy/taxmap_slv_ssu_ref_" + slv_version + ".txt.gz"
+  silva_parc_taxonomy = "https://ftp.arb-silva.de/release_{}/Exports/taxonomy/taxmap_slv_ssu_parc_{}.txt.gz".format(slv_version,slv_version)
+  silva_ref_taxonomy = "https://ftp.arb-silva.de/release_{}/Exports/taxonomy/taxmap_slv_ssu_ref_{}.txt.gz".format(slv_version,slv_version)
   silva_nr99_taxonomy = "https://ftp.arb-silva.de/release_{}/Exports/taxonomy/taxmap_slv_ssu_ref_nr_{}.txt.gz".format(slv_version,slv_version)
 
   # import as pandas dataframe
-  #df_silva_parc_to_ncbi = pd.DataFrame(pd.read_csv(silva_parc_to_ncbi, sep='\t', engine='python', usecols=[0,50], encoding='utf-8', error_bad_lines=False))
-  #df_silva_ref_to_ncbi = pd.DataFrame(pd.read_csv(silva_ref_to_ncbi, sep='\t', engine='python', usecols=[0,50], encoding='utf-8', error_bad_lines=False))
+  df_silva_parc_to_ncbi = pd.DataFrame(pd.read_csv(silva_parc_to_ncbi, sep='\t', engine='python', usecols=[0,50], encoding='utf-8', error_bad_lines=False))
+  df_silva_ref_to_ncbi = pd.DataFrame(pd.read_csv(silva_ref_to_ncbi, sep='\t', engine='python', usecols=[0,50], encoding='utf-8', error_bad_lines=False))
   df_silva_nr99_to_ncbi = pd.DataFrame(pd.read_csv(silva_nr99_to_ncbi, sep='\t', engine='python', usecols=[0,50], encoding='utf-8', error_bad_lines=False))
 
   # import as pandas dataframe
-  #df_silva_parc_taxonomy = pd.DataFrame(pd.read_csv(silva_parc_taxonomy, sep='\t', engine='python', usecols=[0,3,4,5], encoding='utf-8', error_bad_lines=False))
-  #df_silva_ref_taxonomy = pd.DataFrame(pd.read_csv(silva_ref_taxonomy, sep='\t', engine='python', usecols=[0,3,4,5], encoding='utf-8', error_bad_lines=False))
+  df_silva_parc_taxonomy = pd.DataFrame(pd.read_csv(silva_parc_taxonomy, sep='\t', engine='python', usecols=[0,3,4,5], encoding='utf-8', error_bad_lines=False))
+  df_silva_ref_taxonomy = pd.DataFrame(pd.read_csv(silva_ref_taxonomy, sep='\t', engine='python', usecols=[0,3,4,5], encoding='utf-8', error_bad_lines=False))
   df_silva_nr99_taxonomy = pd.DataFrame(pd.read_csv(silva_nr99_taxonomy, sep='\t', engine='python', usecols=[0,3,4,5], encoding='utf-8', error_bad_lines=False))
 
   # concatenate dataframes
   df_silva_to_ncbi_ALL_trimmed = df_silva_nr99_to_ncbi
   df_silva_taxonomy_ALL_trimmed = df_silva_nr99_taxonomy
-  #df_silva_to_ncbi_ALL_trimmed = pd.concat([df_silva_parc_to_ncbi,df_silva_ref_to_ncbi,df_silva_nr99_to_ncbi])
-  #df_silva_taxonomy_ALL_trimmed = pd.concat([df_silva_parc_taxonomy,df_silva_ref_taxonomy,df_silva_nr99_taxonomy])
+  df_silva_to_ncbi_ALL_trimmed = pd.concat([df_silva_parc_to_ncbi,df_silva_ref_to_ncbi,df_silva_nr99_to_ncbi])
+  df_silva_taxonomy_ALL_trimmed = pd.concat([df_silva_parc_taxonomy,df_silva_ref_taxonomy,df_silva_nr99_taxonomy])
 
   # drop duplicates
   df_silva_to_ncbi_ALL_trimmed_dereplication = df_silva_to_ncbi_ALL_trimmed.drop_duplicates()
@@ -47,8 +47,8 @@ def import_silva_to_ncbi_table(slv_version):
 
 def merge_current_and_legacy_silva(slv_version, legacy_slv_version):
   # import as pandas dataframe
-  current_silva = pd.DataFrame(pd.read_csv("SILVA__slv{}_to_ncbi.tsv".format(slv_version), sep='\t', engine='python', encoding='utf-8', error_bad_lines=False))
-  legacy_silva = pd.DataFrame(pd.read_csv("SILVA__slv{}_to_ncbi.tsv".format(legacy_slv_version), sep='\t', engine='python', encoding='utf-8', error_bad_lines=False))
+  current_silva = pd.DataFrame(pd.read_csv("SILVA__slv{}_to_ncbi.tsv".format(slv_version), sep='\t', engine='python', encoding='utf-8', on_bad_lines=False))
+  legacy_silva = pd.DataFrame(pd.read_csv("SILVA__slv{}_to_ncbi.tsv".format(legacy_slv_version), sep='\t', engine='python', encoding='utf-8', on_bad_lines=False))
 
   # merge
   silva_ALL_COMBINED = current_silva.merge(legacy_silva, left_on='SLV_accession', right_on='SLV_accession')

@@ -7,11 +7,11 @@ def import_img_to_ncbi_table():
 
   # paths to data
   img_to_ncbi_archaea = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/IMG/current/IMGMER-Archaea_27-oct-2022.tsv.gz"
-  img_to_ncbi_bacteria = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/IMG/current/IMGMER-Bacteria_27-oct-2022.gz"
-  img_to_ncbi_eukaryota = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/IMG/current/IMGMER-Eukaryota_27-oct-2022.gz"
-  img_to_ncbi_plasmid = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/IMG/current/IMGMER-Plasmid_27-oct-2022.gz"
-  img_to_ncbi_viruses = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/IMG/current/IMGMER-Viruses_27-oct-2022.gz"
-  img_to_ncbi_gfragment = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/IMG/current/IMGMER-GFragment_27-oct-2022.gz"
+  img_to_ncbi_bacteria = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/IMG/current/IMGMER-Bacteria_27-oct-2022.tsv.gz"
+  img_to_ncbi_eukaryota = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/IMG/current/IMGMER-Eukaryota_27-oct-2022.tsv.gz"
+  img_to_ncbi_plasmid = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/IMG/current/IMGMER-Plasmid_27-oct-2022.tsv.gz"
+  img_to_ncbi_viruses = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/IMG/current/IMGMER-Viruses_27-oct-2022.tsv.gz"
+  img_to_ncbi_gfragment = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/IMG/current/IMGMER-GFragment_27-oct-2022.tsv.gz"
 
   # paths to old data
   # img_to_ncbi_archaea = "https://raw.githubusercontent.com/jungbluth/taxonomy_welder/main/docs/IMG/old/taxontable36551_19-jan-2021.xls.gz"
