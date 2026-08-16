@@ -61,37 +61,37 @@ if __name__ == "__main__":
   # unique use cases require legacy silva (e.g. MGnify currently uses SILVA v132)
   legacy_silva_version = args.legacy_silva_version
 
-  if args.dl_img is not 'n':
+  if args.dl_img != 'n':
     print("\nStart: Loading cached IMG files")
     df_img_to_ncbi = img.import_img_to_ncbi_table()
     df_img_to_ncbi.to_csv("IMG__img_to_ncbi.tsv", index=False, sep='\t', header=True)
     print("End: Loading cached IMG files")
 
-  if args.dl_ncbi is not 'n':
+  if args.dl_ncbi != 'n':
     print("\nStart: Loading cached NCBI files")
     df_ncbi = ncbi.import_ncbi_table()
     df_ncbi.to_csv("NCBI__ncbi_full_taxonomy.tsv", index=False, sep='\t', header=True)
     print("End: Loading cached NCBI files")
 
-  if args.dl_gtdb is not 'n':
+  if args.dl_gtdb != 'n':
     print("\nStart: Downloading current GTDB files")
     df_gtdb_to_ncbi_to_gg_silva_archaea_plus_bacteria_trim = gtdb.import_gtdb_to_ncbi_to_gg_to_silva_table()
     df_gtdb_to_ncbi_to_gg_silva_archaea_plus_bacteria_trim.to_csv("GTDB__gtdb_to_ncbi_to_silva_to_gg.tsv", index=False, sep='\t', header=True)
     print("End: Downloading GTDB files")
 
-  if args.dl_silva is not 'n':
+  if args.dl_silva != 'n':
     print("\nStart: Downloading current SILVA files")
     df_silva_to_ncbi = silva.import_silva_to_ncbi_table(silva_version)
     df_silva_to_ncbi.to_csv("SILVA__slv{}_to_ncbi.tsv".format(silva_version), index=False, sep='\t', header=True)
     print("End: Downloading current SILVA files")
 
-  if args.dl_legacy_silva is not 'n':
+  if args.dl_legacy_silva != 'n':
     print("\nStart: Downloading legacy (v{}) SILVA files".format(legacy_silva_version))
     df_silva_to_ncbi = silva.import_silva_to_ncbi_table(legacy_silva_version)
     df_silva_to_ncbi.to_csv("SILVA__slv{}_to_ncbi.tsv".format(legacy_silva_version), index=False, sep='\t', header=True)
     print("End: Downloading legacy (v{}) SILVA files".format(legacy_silva_version))
 
-  if args.dl_silva is not 'n' and args.dl_legacy_silva is not 'n':
+  if args.dl_silva != 'n' and args.dl_legacy_silva != 'n':
     print("\nStart: Merging current and legacy (v{}) SILVA files".format(legacy_silva_version))
     silva_merged = silva.merge_current_and_legacy_silva(silva_version, legacy_silva_version)
     silva_merged.to_csv("SILVA__slv{}_slv{}_to_ncbi.tsv".format(silva_version,legacy_silva_version), index=False, sep='\t', header=True)
